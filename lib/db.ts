@@ -9,6 +9,6 @@ const connectionString =
 
 export const sql = neon(connectionString, {
   fetchOptions: {
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(30000),
   },
 });
