@@ -1,0 +1,22 @@
+# This file records config keys seen in newer docs/snippets but not
+# verified against the installed codex-cli 0.116.0 on this machine.
+
+[tui]
+notifications = true
+alternate_screen = "auto"
+animations = true
+show_tooltips = true
+
+[history]
+persistence = "save-all"
+max_bytes = 10485760
+
+[analytics]
+enabled = true
+
+[feedback]
+enabled = true
+
+# Additional unverified examples seen in docs/snippets:
+# approval_policy = "unless-trusted"
+# notify = ["terminal-notifier", "-title", "Codex", "-message", "Task complete"]

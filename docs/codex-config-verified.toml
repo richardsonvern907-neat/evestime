@@ -1,0 +1,20 @@
+model = "gpt-5.4"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+service_tier = "fast"
+model_reasoning_effort = "xhigh"
+
+[sandbox_workspace_write]
+network_access = true
+
+[features]
+multi_agent = true
+
+[projects."/home/shadowweaver/Shadow-tasks/evestime-clean"]
+trust_level = "trusted"
+
+# Verified on this machine:
+# - codex-cli 0.116.0
+# - --add-dir is supported as a CLI flag
+# - --no-alt-screen is supported as a CLI flag
+# - execpolicy checks work with ~/.codex/execpolicy/default.rules

@@ -21,7 +21,7 @@ export default function Testimonials() {
           <div className="flex justify-center mb-4">
             {[...Array(testimonials[index].rating)].map((_, i) => <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />)}
           </div>
-          <p className="text-lg md:text-xl text-gray-700 italic text-center mb-6">"{testimonials[index].text}"</p>
+          <p className="text-lg md:text-xl text-gray-700 italic text-center mb-6">&ldquo;{testimonials[index].text}&rdquo;</p>
           <p className="text-center font-semibold">{testimonials[index].name}</p>
           <p className="text-center text-gray-500 text-sm">{testimonials[index].role}</p>
           <div className="flex justify-center gap-4 mt-6">
