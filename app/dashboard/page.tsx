@@ -23,12 +23,34 @@ export default async function Dashboard() {
     redirect("/login");
   }
 
-  const accounts = await sql`SELECT * FROM accounts WHERE user_id = ${user[0].id}`;
-  const transactions = await sql`SELECT * FROM transactions WHERE user_id = ${user[0].id} ORDER BY date DESC LIMIT 10`;
+  const tables = await sql`
+    SELECT
+      to_regclass('public.accounts')::text AS accounts_table,
+      to_regclass('public.transactions')::text AS transactions_table
+  `;
+
+  const tableInfo = tables[0] as
+    | {
+        accounts_table: string | null;
+        transactions_table: string | null;
+      }
+    | undefined;
+
+  const hasAccountsTable = Boolean(tableInfo?.accounts_table);
+  const hasTransactionsTable = Boolean(tableInfo?.transactions_table);
+  const accounts = hasAccountsTable ? await sql`SELECT * FROM accounts WHERE user_id = ${user.id}` : [];
+  const transactions = hasTransactionsTable
+    ? await sql`SELECT * FROM transactions WHERE user_id = ${user.id} ORDER BY date DESC LIMIT 10`
+    : [];
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold">Welcome, {session.user?.name || session.user?.email}</h1>
+      {!hasAccountsTable || !hasTransactionsTable ? (
+        <div className="mt-4 rounded border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
+          Your account is authenticated, but portfolio data is not fully available in this environment yet.
+        </div>
+      ) : null}
       <div className="mt-6 grid md:grid-cols-2 gap-6">
         <div className="bg-white p-4 rounded shadow">
           <h2 className="text-xl font-semibold">Accounts</h2>

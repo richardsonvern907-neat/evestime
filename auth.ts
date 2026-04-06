@@ -4,7 +4,7 @@ import { CredentialsSignin } from "next-auth";
 import bcrypt from "bcryptjs";
 
 import { sql } from "./lib/db";
-import { requireEnv } from "./lib/env";
+import { requireAnyEnv } from "./lib/env";
 
 class AuthServiceUnavailableError extends CredentialsSignin {
   code = "service_unavailable";
@@ -13,7 +13,7 @@ class AuthServiceUnavailableError extends CredentialsSignin {
 export const { handlers, auth } = NextAuth({
   debug: process.env.NODE_ENV !== "production",
   pages: { signIn: "/login" },
-  secret: requireEnv("NEXTAUTH_SECRET"),
+  secret: requireAnyEnv(["NEXTAUTH_SECRET", "AUTH_SECRET"]),
   session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({

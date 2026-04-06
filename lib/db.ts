@@ -1,11 +1,8 @@
 import { neon } from "@neondatabase/serverless";
 
-import { requireEnv } from "./env";
+import { getFirstEnv, requireAnyEnv } from "./env";
 
-const connectionString =
-  process.env.NODE_ENV !== "production" && process.env.DATABASE_URL_UNPOOLED
-    ? process.env.DATABASE_URL_UNPOOLED
-    : requireEnv("DATABASE_URL");
+const connectionString = requireAnyEnv(["DATABASE_URL", "POSTGRES_URL"]);
 
 export const sql = neon(connectionString, {
   fetchOptions: {
