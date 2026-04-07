@@ -5,6 +5,10 @@ Date: 2026-04-07
 ## Objective
 Stabilize production authentication on Vercel first, then continue with page-level fixes.
 
+## Reference Websites
+1. Primary design and UX reference: `https://www.moneylion.com/`
+   - Use this as a benchmark for page structure, conversion-focused sections, trust messaging, and responsive behavior during the upcoming page repair and redesign phase.
+
 ## What Was Implemented
 1. Added protected production diagnostics endpoint:
    - `GET /api/auth/diagnostics`
@@ -67,7 +71,7 @@ curl -sS https://evestime.vercel.app/api/auth/diagnostics \
    - consider fallback/retry patterns for critical auth query path.
 3. After auth stability:
    - add missing public pages for `/offers` and `/coin-assets` consuming existing APIs.
-   - then continue broader page repair against reference banking site.
+   - then continue broader page repair against the MoneyLion reference site.
 
 ## Files Touched in This Phase
 1. `app/api/auth/diagnostics/route.ts`
