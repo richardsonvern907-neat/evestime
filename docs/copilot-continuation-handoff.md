@@ -84,3 +84,39 @@ curl -sS https://evestime.vercel.app/api/auth/diagnostics \
 ## Safety Notes
 1. `.vercel-check/` now ignored in git because it contains pulled env material.
 2. No secrets are stored in this document.
+
+## Frontend-First Execution (Latest)
+1. Refreshed landing experience to align with a conversion-focused structure inspired by MoneyLion while intentionally using an opposite visual language:
+   - deep navy + warm amber palette
+   - strong card hierarchy
+   - explicit lead-routing messaging
+2. Updated core landing components:
+   - `components/Header.tsx`
+   - `components/Hero.tsx`
+   - `components/Features.tsx`
+   - `components/Stats.tsx`
+   - `components/HowItWorks.tsx`
+   - `components/Testimonials.tsx`
+   - `components/Footer.tsx`
+   - global styling in `app/globals.css` and metadata in `app/layout.tsx`
+3. Added missing public catalog pages that consume existing backend APIs:
+   - `app/offers/page.tsx`
+   - `app/offers/[slug]/page.tsx`
+   - `app/coin-assets/page.tsx`
+   - `app/coin-assets/[slug]/page.tsx`
+4. Validation status:
+   - `pnpm lint` passes.
+   - `pnpm build` compiles frontend code and TypeScript, but still fails during page-data collection when required auth env vars are missing locally (`NEXTAUTH_SECRET` or `AUTH_SECRET`), which is expected until env is provided.
+
+## Immediate Continuation Steps
+1. Run local dev and visually verify:
+   - `/`
+   - `/offers`
+   - `/offers/[slug]`
+   - `/coin-assets`
+   - `/coin-assets/[slug]`
+2. If visual QA passes, deploy and run production smoke checks:
+   - auth diagnostics
+   - login + dashboard
+   - public catalog pages and APIs
+3. Continue page-by-page stabilization against the reference site once auth health remains stable across repeated runs.
